@@ -1,4 +1,4 @@
-package dev.folomkin.todotest;
+package todotest;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
