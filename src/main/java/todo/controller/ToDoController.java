@@ -1,14 +1,19 @@
 package todo.controller;
 
+import io.swagger.v3.oas.annotations.media.ArraySchema;
+import io.swagger.v3.oas.annotations.media.Schema;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
-import todo.entity.ToDo;
+import org.springframework.web.bind.annotation.RestController;
+import todo.entity.Todo;
 import todo.repository.TodoRepository;
 
-@Controller
-@RequestMapping("/")
+@RestController
+@RequestMapping("/api")
 public class ToDoController {
 
     private final TodoRepository todoRepository;
@@ -18,8 +23,11 @@ public class ToDoController {
         this.todoRepository = todoRepository;
     }
 
-    @GetMapping(value = "todos")
-    public ResponseEntity<Iterable<ToDo>> getToDos(){
-
+    @ArraySchema
+    @GetMapping(value = "/todos")
+    public ResponseEntity<Iterable<Todo>> getToDos(@RequestHeader HttpHeaders headers) {
+        return new ResponseEntity<Iterable<Todo>>
+                (this.todoRepository.findAll(),
+                        headers, HttpStatus.OK);
     }
 }
