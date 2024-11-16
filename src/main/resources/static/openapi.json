@@ -12,35 +12,35 @@
     }
   ],
   "paths": {
-    "/api/catalogue/products": {
+    "/api/todos": {
       "get": {
         "responses": {
           "200": {
             "description": "Списка задач получен",
             "content": {
-              "application/todo+json": {
+              "application/todos+json": {
                 "schema": {
                   "type": "array",
                   "items": {
                     "type": "object",
                     "properties": {
                       "id": {
-                        "type": "string",
+                        "type": "integer",
                         "title": "Идентификатор задачи",
                         "nullable": false,
-                        "example": "5e0ea466-a385-11ef-8888-531aa9123a36"
+                        "example": "1"
                       },
-                      "todoTitle": {
+                      "title": {
                         "type": "string",
-                        "title": "Название товара",
+                        "title": "Заголовок задачи",
                         "nullable": false,
-                        "example": "Молоко, 3,2%, 1 литр"
+                        "example": "Купить хлеб"
                       },
-                      "details": {
+                      "description": {
                         "type": "string",
-                        "title": "Подробное описание товара",
+                        "title": "Описание задачи",
                         "nullable": true,
-                        "example": "Молоко с жирностью 3,2% в упаковке 1 литр"
+                        "example": "Купить хлеб 1 булку"
                       }
                     },
                     "required": [
@@ -57,21 +57,21 @@
       "post": {
         "requestBody": {
           "content": {
-            "application/vnd.eselpo.catalogue.new-product-payload.v1+json": {
+            "application/todos+json":{
               "schema": {
                 "type": "object",
                 "properties": {
                   "title": {
                     "type": "string",
-                    "title": "Название товара",
+                    "title": "Заголовок задачи",
                     "nullable": false,
-                    "example": "Молоко, 3,2%, 1 литр"
+                    "example": "Купить хлеб"
                   },
-                  "details": {
+                  "description": {
                     "type": "string",
-                    "title": "Подробное описание товара",
+                    "title": "Описание задачи",
                     "nullable": true,
-                    "example": "Молоко с жирностью 3,2% в упаковке 1 литр"
+                    "example": "Купить хлеб 1 булку"
                   }
                 },
                 "required": [
@@ -90,27 +90,27 @@
               }
             },
             "content": {
-              "application/vnd.eselpo.catalogue.product.v1+json": {
+              "application/todos+json":{
                 "schema": {
                   "type": "object",
                   "properties": {
                     "id": {
-                      "type": "string",
-                      "title": "Идентификатор товара",
+                      "type": "integer",
+                      "title": "Идентификатор задачи",
                       "nullable": false,
-                      "example": "5e0ea466-a385-11ef-8888-531aa9123a36"
+                      "example": "1"
                     },
                     "title": {
                       "type": "string",
-                      "title": "Название товара",
+                      "title": "Заголовок задачи",
                       "nullable": false,
-                      "example": "Молоко, 3,2%, 1 литр"
+                      "example": "Купить хлеб"
                     },
-                    "details": {
+                    "description": {
                       "type": "string",
-                      "title": "Подробное описание товара",
+                      "title": "Описание задачи",
                       "nullable": true,
-                      "example": "Молоко с жирностью 3,2% в упаковке 1 литр"
+                      "example": "Купить хлеб 1 булку"
                     }
                   },
                   "required": [
