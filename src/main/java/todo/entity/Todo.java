@@ -20,12 +20,13 @@ public class Todo {
     @Id
     private String id;
 
+    @NotBlank
     @Column(nullable = false)
-    private String title;
+    private String todoTitle;
 
     @NotBlank
     @Column(nullable = false)
-    private String description;
+    private String details;
     private LocalDateTime created;
     private LocalDateTime modified;
 
@@ -54,14 +55,14 @@ public class Todo {
         this.modified = now;
     }
 
-    public Todo(String title,
-                String description,
+    public Todo(String todoTitle,
+                String details,
                 String priority,
                 String status,
                 String author,
                 String executor) {
-        this.title = title;
-        this.description = description;
+        this.todoTitle = todoTitle;
+        this.details = details;
         this.priority = priority;
         this.status = status;
         this.author = author;

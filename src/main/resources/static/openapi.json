@@ -1,94 +1,130 @@
 {
   "openapi": "3.1.0",
   "info": {
-    "title": "Todo Test",
-    "description": "API ToDo project",
-    "version": "1.0.0"
+    "title": "ToDo REST API",
+    "description": "ToDo REST API Docs",
+    "version": "0.1"
   },
   "servers": [
     {
-      "url": "http://localhost:8080"
-    }
-  ],
-  "tags": [
-    {
-      "name": "Todo Test project. API"
+      "url": "http://localhost:8080",
+      "description": "Локальный сервер разработки"
     }
   ],
   "paths": {
-    "/api/todos": {
+    "/api/catalogue/products": {
       "get": {
-          "responses": {
-            "200": {
-              "description": "Успешный результат получения списка задач",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "type": "array",
-                    "items": {
-                      "properties": {
-                        "id": {
-                          "type": "string",
-                          "title": "Идентификатор задачи",
-                          "nullable": false,
-                          "example": "a396a088-172c-11ee-aa6f-4f6009552211"
-                        },
-                        "description": {
-                          "type": "string",
-                          "title": "Описание задачи",
-                          "nullable": false,
-                          "example": "Прочесть главу книги Spring in Actions"
-                        },
-                        "created": {
-                          "type": "string",
-                          "title": "Время создания задачи",
-                          "nullable": true,
-                          "example": "1970-01-01"
-                        },
-                        "modified": {
-                          "type": "string",
-                          "title": "Время обновления задачи",
-                          "nullable": true,
-                          "example": "2024-31-31"
-                        },
-                        "priority": {
-                          "type": "string",
-                          "title": "Приоритет задачи",
-                          "nullable": true,
-                          "example": "Высокий/Средний/Низкий"
-                        },
-                        "status": {
-                          "type": "string",
-                          "title": "Статус задачи",
-                          "nullable": true,
-                          "example": "в ожидании/в процессе/завершено"
-                        },
-                        "completed": {
-                          "type": "boolean",
-                          "title": "Временное поле",
-                          "nullable": true,
-                          "example": "....."
-                        },
-                        "author": {
-                          "type": "string",
-                          "title": "Автор",
-                          "nullable": true,
-                          "example": "Ivanov A.I."
-                        },
-                        "executor": {
-                          "type": "string",
-                          "title": "Исполнитель",
-                          "nullable": true,
-                          "example": "Petrov A.I."
-                        }
-
+        "responses": {
+          "200": {
+            "description": "Списка задач получен",
+            "content": {
+              "application/todo+json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string",
+                        "title": "Идентификатор задачи",
+                        "nullable": false,
+                        "example": "5e0ea466-a385-11ef-8888-531aa9123a36"
+                      },
+                      "todoTitle": {
+                        "type": "string",
+                        "title": "Название товара",
+                        "nullable": false,
+                        "example": "Молоко, 3,2%, 1 литр"
+                      },
+                      "details": {
+                        "type": "string",
+                        "title": "Подробное описание товара",
+                        "nullable": true,
+                        "example": "Молоко с жирностью 3,2% в упаковке 1 литр"
                       }
-                    }
+                    },
+                    "required": [
+                      "id",
+                      "title"
+                    ]
                   }
                 }
               }
             }
           }
+        }
+      },
+      "post": {
+        "requestBody": {
+          "content": {
+            "application/vnd.eselpo.catalogue.new-product-payload.v1+json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "title": {
+                    "type": "string",
+                    "title": "Название товара",
+                    "nullable": false,
+                    "example": "Молоко, 3,2%, 1 литр"
+                  },
+                  "details": {
+                    "type": "string",
+                    "title": "Подробное описание товара",
+                    "nullable": true,
+                    "example": "Молоко с жирностью 3,2% в упаковке 1 литр"
+                  }
+                },
+                "required": [
+                  "title"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Товар успешно создан",
+            "headers": {
+              "Location": {
+                "required": true
+              }
+            },
+            "content": {
+              "application/vnd.eselpo.catalogue.product.v1+json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "title": "Идентификатор товара",
+                      "nullable": false,
+                      "example": "5e0ea466-a385-11ef-8888-531aa9123a36"
+                    },
+                    "title": {
+                      "type": "string",
+                      "title": "Название товара",
+                      "nullable": false,
+                      "example": "Молоко, 3,2%, 1 литр"
+                    },
+                    "details": {
+                      "type": "string",
+                      "title": "Подробное описание товара",
+                      "nullable": true,
+                      "example": "Молоко с жирностью 3,2% в упаковке 1 литр"
+                    }
+                  },
+                  "required": [
+                    "id",
+                    "title"
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Запрос содержит ошибки валидации"
+          }
+        }
       }
     }
   }
