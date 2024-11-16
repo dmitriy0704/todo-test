@@ -6,6 +6,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
+import todo.entity.Todo;
 
 
 import java.util.List;
@@ -26,14 +27,14 @@ public class TodoController {
 
 
     @GetMapping
-    public ResponseEntity<List<TodosV1Presentation>> getProducts() {
+    public ResponseEntity<List<Todo>> getProducts() {
         return ResponseEntity.ok()
                 .contentType(MediaType.valueOf("application/todos+json"))
                 .body(List.of(
-                        new TodosV1Presentation("1",
+                        new Todo("1",
                                 "Купить хлеб",
                                 "Купить хлеб 1 булку"),
-                        new TodosV1Presentation("2",
+                        new Todo("2",
                                 "Купить молоко",
                                 "Купить молоко 2л")
                 ));
