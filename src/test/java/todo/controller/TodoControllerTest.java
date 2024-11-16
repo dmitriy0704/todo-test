@@ -36,7 +36,7 @@ class TodoControllerTest {
                 // Тогда:
                 .andExpectAll(status().isOk(),
                         openApi().isValid("static/openapi.json"),
-                        content().contentTypeCompatibleWith("application/todo+json"),
+                        content().contentTypeCompatibleWith("application/todos+json"),
                         content().json("""
                                        [
                                           {
